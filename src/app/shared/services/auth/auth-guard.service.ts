@@ -14,11 +14,12 @@ export class AuthGuardService implements CanActivate {
   canActivate(route, state:RouterStateSnapshot): Observable<boolean>{
     
     let returnUrl = state.url
+    
     return this.authService.decodeUser().pipe(
       map(user =>{
 
         let date = new Date(0);
-        console.log(date.setUTCSeconds(user.exp).valueOf(),' ', new Date().valueOf())
+
         if(date.setUTCSeconds(user.exp).valueOf() > new Date().valueOf()) return true;
 
         this.router.navigate(['/login'],{queryParams:{returnUrl : returnUrl},queryParamsHandling:'merge'});

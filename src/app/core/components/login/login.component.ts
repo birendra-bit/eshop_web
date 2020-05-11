@@ -26,10 +26,9 @@ export class LoginComponent implements OnInit {
         let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
 
         localStorage.setItem('returnUrl',returnUrl);
-        console.log('login',res)
+
         let user = Object.entries(res);
         localStorage.setItem('token', user[0][1]);
-
         this.shoppingcartService.getTotalItemsCount();
 
         this.auth.updateUser.emit();

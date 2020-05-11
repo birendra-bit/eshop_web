@@ -1,3 +1,4 @@
+import { AuthService } from './../../../shared/services/auth/auth.service';
 import { ShoppingCartService } from 'src/app/shared/services/business/shopping-cart.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ProductService } from './../../../shared/services/business/product.service';
@@ -18,13 +19,17 @@ export class ProductComponent implements OnInit {
 
   constructor( private productService: ProductService,
       private shoppingCartService:ShoppingCartService, 
-      private route: ActivatedRoute) {}
+      private route: ActivatedRoute,
+      private auth:AuthService) {}
 
   ngOnInit(){
 
-    this.shoppingCartService.getData().subscribe(items=>{
-      this.cartItems = [...items[0].items]
-    })
+    if(this.auth.isLoggedIn()){
+      
+      this.shoppingCartService.getData().subscribe(items=>{
+        this.cartItems = [...items[0].items]
+      })
+    }
 
     this.productService.getData().subscribe((product:Product[])=>{
       this.products = product;

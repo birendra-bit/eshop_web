@@ -1,3 +1,4 @@
+import { AdminModule } from './admin/admin.module';
 import { PageNotFoundComponent } from './core/components/page-not-found/page-not-found.component';
 import { RegisterComponent } from './core/components/register/register.component';
 import { LoginComponent } from './core/components/login/login.component';
@@ -23,6 +24,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     CoreModule,
     SharedModule,
     ShoppingModule,
+    AdminModule,
     RouterModule.forRoot([
       {
         path:'',

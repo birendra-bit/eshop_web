@@ -1,1 +1,60 @@
-<p>shopping-cart works!</p>
+<ng-container class="row col-10">
+    <h1>Shopping Cart</h1>
+    <p>
+      You have <strong> {{ shoppingItemCount }}</strong> items in your shopping
+      cart.
+      <button
+        *ngIf="shoppingItemCount"
+        class="btn btn-light btn-sm"
+        (click)="clearCart()"
+      >
+        <strong>Clear Cart</strong>
+      </button>
+    </p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th></th>
+          <th class="text-left">Product</th>
+          <th class="text-center" style="width: 230px;">Quantity</th>
+          <th class="text-right" style="width: 200px;">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of product">
+          <td>
+            <div
+              *ngIf="p.imageUrl"
+              [style.backgroundImage]="
+                'url(' + p.imageUrl + ')'
+              "
+              class="thumbnail"
+            ></div>
+          </td>
+          <td>{{ p.title }}</td>
+          <td class="text-center">{{getQuantity(p._id)}}
+            <!-- <product-quantity
+              [product]="p"
+              [quantity]="getQuantity(p._id)"
+            ></product-quantity> -->
+          </td>
+          <td class="text-right">
+            {{
+              p.price * getQuantity(p._id) | currency: "Rs "
+            }}
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr>
+          <th>
+            <a *ngIf="shoppingItemCount" routerLink="/check-out" class="btn btn-primary btn-sm">Check Out</a>
+          </th>
+          <th>Total</th>
+          <th class="text-center">{{ shoppingItemCount }}</th>
+          <th class="text-right">{{ totalPrice | currency: "Rs " }}</th>
+        </tr>
+      </tfoot>
+    </table>
+  </ng-container>
+  

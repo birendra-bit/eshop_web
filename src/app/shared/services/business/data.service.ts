@@ -7,6 +7,7 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 //   providedIn: 'root'
 // })
 export class DataService {
+
   headers: HttpHeaders;
 
   constructor(private url:string, private httpClient: HttpClient) {
@@ -18,13 +19,37 @@ export class DataService {
    }
 
   getData(){
-    return this.httpClient.get(this.url,{headers:this.headers}).pipe(
+    return this.httpClient.get(`${this.url}`,{headers:this.headers}).pipe(
       catchError(this.handleError)
     )
   }
 
+  getItems(items){
+    return this.httpClient.get(`${this.url}/${items}`,{headers:this.headers}).pipe(
+      catchError(this.handleError)
+      )
+  }
+
   createData(data){
-    return this.httpClient.post(this.url,JSON.stringify(data),{headers:this.headers}).pipe(
+    return this.httpClient.post(`${this.url}`,JSON.stringify(data),{headers:this.headers}).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  getDataByID(id){
+    return this.httpClient.get(`${this.url}/${id}`,{headers:this.headers}).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  updateData(id,data){
+    return this.httpClient.patch(`${this.url}/${id}`,JSON.stringify(data),{headers:this.headers}).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  deleteData(id){
+    return this.httpClient.delete(`${this.url}/${id}`,{headers:this.headers}).pipe(
       catchError(this.handleError)
     )
   }

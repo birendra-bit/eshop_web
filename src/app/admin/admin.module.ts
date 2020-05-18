@@ -7,6 +7,7 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { RouterModule } from '@angular/router';
 import { AuthGuardService } from '../shared/services/auth/auth-guard.service';
 import { AdminAuthGuardService } from '../shared/services/auth/admin-auth-guard.service';
+import { CategoryResolveService } from '../shared/services/category-resolve.service';
 
 
 
@@ -27,12 +28,15 @@ import { AdminAuthGuardService } from '../shared/services/auth/admin-auth-guard.
       {
         path:'admin/products/new',
         component:ProductFormComponent, 
-        canActivate:[AuthGuardService,AdminAuthGuardService]
+        canActivate:[AuthGuardService,AdminAuthGuardService],
+        resolve:{
+          category: CategoryResolveService
+        }
       },
       {
         path:'admin/products/:id',
         component:ProductFormComponent, 
-        canActivate:[AuthGuardService,AdminAuthGuardService]
+        canActivate:[AuthGuardService,AdminAuthGuardService],
       },
       {
         path:'admin/products',
@@ -43,7 +47,8 @@ import { AdminAuthGuardService } from '../shared/services/auth/admin-auth-guard.
   ],
   providers:[
     AuthGuardService,
-    AdminAuthGuardService
+    AdminAuthGuardService,
+    CategoryResolveService
   ]
 })
 export class AdminModule { }

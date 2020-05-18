@@ -1,7 +1,10 @@
+import { IResponse } from './../../models/IResponse';
 import { catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { throwError } from 'rxjs';
+import { throwError, Observable } from 'rxjs';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 // @Injectable({
 //   providedIn: 'root'
@@ -9,8 +12,8 @@ import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http'
 export class DataService {
 
   headers: HttpHeaders;
-
-  constructor(private url:string, private httpClient: HttpClient) {
+   
+    constructor(private url:string, private httpClient: HttpClient) {
     this.headers = new HttpHeaders(
       {
         'Content-Type': 'application/json; charset=utf-8',
@@ -18,44 +21,53 @@ export class DataService {
       })
    }
 
-  getData(){
-    return this.httpClient.get(`${this.url}`,{headers:this.headers}).pipe(
+  getData():Observable<IResponse> {
+    return this.httpClient.get<IResponse>(`${this.url}`,{headers:this.headers}).pipe(
       catchError(this.handleError)
     )
   }
 
-  getItems(items){
-    return this.httpClient.get(`${this.url}/${items}`,{headers:this.headers}).pipe(
+  createData(data):Observable<IResponse>{
+    return this.httpClient.post<IResponse>(`${this.url}`,JSON.stringify(data),{headers:this.headers}).pipe(
       catchError(this.handleError)
+    )
+  }
+
+  getDataByID(id):Observable<IResponse>{
+    return this.httpClient.get<IResponse>(`${this.url}/${id}`,{headers:this.headers}).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  updateData(id,data):Observable<IResponse>{
+    return this.httpClient.patch<IResponse>(`${this.url}/${id}`,JSON.stringify(data),{headers:this.headers}).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  deleteData(id):Observable<IResponse>{
+    return this.httpClient.delete<IResponse>(`${this.url}/${id}`,{headers:this.headers}).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  login(credentials):Observable<IResponse> {
+    
+    return this.httpClient.post<IResponse>(`${this.url}` + '/login',
+      JSON.stringify(credentials), { headers: this.headers }).pipe(
+        catchError(this.handleError)
       )
   }
 
-  createData(data){
-    return this.httpClient.post(`${this.url}`,JSON.stringify(data),{headers:this.headers}).pipe(
-      catchError(this.handleError)
-    )
-  }
+  signUp(credentials):Observable<IResponse> {
 
-  getDataByID(id){
-    return this.httpClient.get(`${this.url}/${id}`,{headers:this.headers}).pipe(
-      catchError(this.handleError)
-    )
-  }
-
-  updateData(id,data){
-    return this.httpClient.patch(`${this.url}/${id}`,JSON.stringify(data),{headers:this.headers}).pipe(
-      catchError(this.handleError)
-    )
-  }
-
-  deleteData(id){
-    return this.httpClient.delete(`${this.url}/${id}`,{headers:this.headers}).pipe(
-      catchError(this.handleError)
-    )
+    return this.httpClient.post<IResponse>(`${this.url}` + '/signup',
+      JSON.stringify(credentials), { headers: this.headers }).pipe(
+        catchError(this.handleError))
   }
 
   handleError = (error) => {
-
+    console.log(error)
     let errorMessage = '';
 
     if (error.error instanceof ErrorEvent) {

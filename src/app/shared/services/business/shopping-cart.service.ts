@@ -26,10 +26,10 @@ export class ShoppingCartService extends DataService {
 
       this.getData().subscribe(items => {
 
-          if(Object.keys(items).length === 0) this.currenItemsCount(0);
+          if(Object.keys(items.data).length === 0) this.currenItemsCount(0);
           else
           {
-            this.shoppingCartItems = { ...items[0] } as ShoppingCartItem
+            this.shoppingCartItems = { ...items.data[0] } as ShoppingCartItem
             let totalItems = this.shoppingCartItems.items.map(item => item.quantity).reduce((prev, next) => prev + next);
             this.currenItemsCount({totalCartItemsCount:totalItems});
           }

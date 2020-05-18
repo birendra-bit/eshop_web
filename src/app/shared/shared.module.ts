@@ -13,6 +13,7 @@ import { CategoryService } from './services/business/category.service';
 import { ProductService } from './services/business/product.service';
 import { ShoppingCartService } from './services/business/shopping-cart.service';
 import { OrderService } from './services/business/order.service';
+import { CategoryResolveService } from './services/category-resolve.service';
 
 
 
@@ -42,7 +43,8 @@ import { OrderService } from './services/business/order.service';
     CategoryService,
     ProductService,
     ShoppingCartService,
-    OrderService
+    OrderService,
+    CategoryResolveService
   ]
 })
 export class SharedModule { }

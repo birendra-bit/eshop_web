@@ -1,6 +1,6 @@
-import { Category } from './../../../../shared/models/category';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CategoryService } from 'src/app/shared/services/business/category.service';
+import { Category } from './../../../../shared/models/category';
 
 @Component({
   selector: 'product-filter',
@@ -8,21 +8,13 @@ import { CategoryService } from 'src/app/shared/services/business/category.servi
   styleUrls: ['./product-filter.component.css']
 })
 export class ProductFilterComponent implements OnInit {
-  categories$: Category[]=[];
+  categories$: Category[];
   @Input('category') category;
-  constructor(private categoryService: CategoryService) {
-    // let categoryArr = [];
-    // this.categoryService.getCategories().snapshotChanges()
-    //   .subscribe(cat => {
-    //     cat.forEach(c => categoryArr.push({ key: c.key, ...c.payload.val() }))
-    //     this.categories$ = [...categoryArr];
-    //   })
-
-  }
+  constructor(private categoryService: CategoryService) {}
 
   ngOnInit(): void {
-    this.categoryService.getData().subscribe((category:Category[])=>{
-      this.categories$ = category
+    this.categoryService.getData().subscribe(category=>{
+      this.categories$ = category.data as Category[]
     })
   }
 }

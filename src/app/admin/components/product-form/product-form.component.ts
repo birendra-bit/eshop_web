@@ -1,10 +1,9 @@
-import { Observable } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/shared/services/business/category.service';
 import { ProductService } from 'src/app/shared/services/business/product.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Category } from 'src/app/shared/models/category';
-import { Product } from 'src/app/shared/models/product';
+import { Category } from './../../../shared/models/category';
+import { Product } from './../../../shared/models/product';
 
 @Component({
   selector: 'app-product-form',
@@ -44,14 +43,14 @@ export class ProductFormComponent implements OnInit {
 
   ngOnInit() {
   
-    this.categoryService.getData().subscribe((category:Category[])=>{
-      this.categories = category
+    this.categoryService.getData().subscribe(category=>{
+      this.categories = category.data as Category[]
     })
       this.route.paramMap.subscribe(params=>{
         this.productId = params.get('id');
         if(this.productId){ 
-          this.productService.getDataByID(this.productId).subscribe((product:Product)=>{
-            this.product = product;
+          this.productService.getDataByID(this.productId).subscribe(product=>{
+            this.product = product.data as Product
           })
         }
       });

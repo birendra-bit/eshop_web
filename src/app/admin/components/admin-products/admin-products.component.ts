@@ -1,5 +1,5 @@
+import { Product } from './../../../shared/models/product';
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/shared/models/product';
 import { Subscription } from 'rxjs';
 import { ShoppingCartItem } from 'src/app/shared/models/shopping-cart-item';
 import { ProductService } from 'src/app/shared/services/business/product.service';
@@ -11,10 +11,10 @@ import { ProductService } from 'src/app/shared/services/business/product.service
 })
 export class AdminProductsComponent implements OnInit {
 
-  productList: Product[]=[];
-  filteredProduct: Product[]=[];
+  productList: Product[];
+  filteredProduct: Product[];
   subscription: Subscription;
-  items : ShoppingCartItem[]=[];
+  items : ShoppingCartItem[];
 
   constructor(private productdService: ProductService) {
 
@@ -26,13 +26,11 @@ export class AdminProductsComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.subscription.unsubscribe();
   }
 
   ngOnInit() {
-
-    this.subscription = this.productdService.getData().subscribe((product:Product[])=>{
-      this.filteredProduct = this.productList = product;
+    this.productdService.getData().subscribe(product=>{
+      this.filteredProduct = this.productList = product.data as Product[]
     })
   }
 }

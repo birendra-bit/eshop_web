@@ -1,10 +1,10 @@
-import { AuthService } from './../../../shared/services/auth/auth.service';
-import { ShoppingCartService } from 'src/app/shared/services/business/shopping-cart.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ProductService } from './../../../shared/services/business/product.service';
 import { Component, OnInit } from '@angular/core';
-import { Product } from 'src/app/shared/models/product';
-import { ShoppingCartItem, Items } from 'src/app/shared/models/shopping-cart-item';
+import { ActivatedRoute } from '@angular/router';
+import { ShoppingCartService } from 'src/app/shared/services/business/shopping-cart.service';
+import { Product } from './../../../shared/models/product';
+import { Items } from './../../../shared/models/shopping-cart-item';
+import { AuthService } from './../../../shared/services/auth/auth.service';
+import { ProductService } from './../../../shared/services/business/product.service';
 
 @Component({
   selector: 'app-product',
@@ -27,12 +27,13 @@ export class ProductComponent implements OnInit {
     if(this.auth.isLoggedIn()){
       
       this.shoppingCartService.getData().subscribe(items=>{
-        this.cartItems = [...items[0].items]
+       if(items.data.length )
+        this.cartItems =  [...items.data[0].items];
       })
     }
 
-    this.productService.getData().subscribe((product:Product[])=>{
-      this.products = product;
+    this.productService.getData().subscribe(product=>{
+      this.products = product.data as Product[]
       this.route.queryParamMap.subscribe(params => {
         this.category = params.get('category');
         this.applyFilter();

@@ -1,3 +1,4 @@
+import { DataService } from './../business/data.service';
 import { AppUser } from './../../models/app-user';
 import { ShoppingCartService } from 'src/app/shared/services/business/shopping-cart.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
@@ -15,7 +16,7 @@ import { decode } from 'querystring';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthService {  
+export class AuthService extends DataService {  
   headers;
   @Output() updateUser = new EventEmitter();
 
@@ -23,10 +24,8 @@ export class AuthService {
     private route: ActivatedRoute,
     private router: Router,
     private shoppingCartService: ShoppingCartService,
-    private httpClient: HttpClient) {
-
-    this.headers = new HttpHeaders({ 'Content-Type': 'application/json; charset=utf-8' });
-
+    httpClient:HttpClient) {
+      super(environment.url,httpClient);
   }
 
   logout() {
@@ -62,17 +61,12 @@ export class AuthService {
     let returnUrl = this.route.snapshot.queryParamMap.get('returnUrl');
     localStorage.setItem('returnUrl', returnUrl);
 
-    return this.httpClient.post(environment.url + '/login',
-      JSON.stringify(credentials), { headers: this.headers }).pipe(
-        catchError(this.handleError)
-      )
+    return super.login(credentials);
   }
 
   signUp(credentials) {
 
-    return this.httpClient.post(environment.url + '/signup',
-      JSON.stringify(credentials), { headers: this.headers }).pipe(
-        catchError(this.handleError))
+    return super.signUp(credentials);
   }
 
   decodeUser():  Observable<AppUser> {
@@ -81,23 +75,5 @@ export class AuthService {
     return of(jwt_decode(token));
     }
     return of(null);
-  }
-  
-  handleError = (error) => {
-
-    let errorMessage = '';
-    console.log('error ',error)
-    if (error.error instanceof ErrorEvent) {
-      
-      errorMessage = `Error: ${error.error.message}`;
-
-    } else {
-
-      errorMessage = `Error Code: ${error.status}\nMessage: ${error.error.message}`;
-
-    }
-
-    window.alert(errorMessage);
-    return throwError(errorMessage);
   }
 }

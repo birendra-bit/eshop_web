@@ -1,4 +1,3 @@
-import { Product } from './product';
 export interface ShoppingCartItem{
     items:Items[],
     _id:string,

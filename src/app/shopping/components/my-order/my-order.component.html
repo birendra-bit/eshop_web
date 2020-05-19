@@ -1,1 +1,20 @@
-<p>my-order works!</p>
+<ng-container class="row col-8">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Customer</th>
+                <th>Placed On</th>
+                <th>Quantity</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items; let i = index ">
+                <td> {{ getName(item.product_id)}} </td>
+                <td> {{item.placedDate | date}} </td>
+                <td> {{ item.quantity }}</td>
+                <td><a href="#">View</a> </td>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>

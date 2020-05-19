@@ -1,8 +1,9 @@
-<div *ngIf="product.title" class="card">
+<div *ngIf="product.title" class="card" style="height: 400px;">
   <img
     *ngIf="product.imageUrl"
     [src]="product.imageUrl"
     class="card-img-top"
+    style="height: 270px;"
     alt="{{ product.title }}"
   />
   <div class="card-body">

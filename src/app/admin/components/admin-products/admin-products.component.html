@@ -1,13 +1,12 @@
-<p>
+
+<div class="row col-10 m-auto ">
     <a routerLink="/admin/products/new" class="btn btn-primary">New Product</a>
-</p>
-<p class="row col-10">
     <input 
         #query
         (keyup)="filter(query.value)"
         type="text" class="form-control" placeholder="Search...">
-</p>
-<div class="row col-10">
+</div>
+<div class="row col-10 m-auto">
     <table class="table">
         <thead>
             <tr>

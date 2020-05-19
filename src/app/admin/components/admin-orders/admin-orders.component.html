@@ -3,16 +3,16 @@
         <thead>
             <tr>
                 <th>Customer</th>
-                <th>Date</th>
+                <th>Total Items </th>
                 <th></th>
             </tr>
         </thead>
-        <!-- <tbody>
-            <tr *ngFor="let order of orders">
-                <td> {{order.shipping.name}} </td>
-                <td> {{order.datePlaced | date }}</td>
+        <tbody>
+            <tr *ngFor="let cart of shoppingCartItems; let i = index ">
+                <td> {{ getName(cart.user_id)}} </td>
+                <td> {{ getQty(i) }}</td>
                 <td><a href="#">view</a> </td>
             </tr>
-        </tbody> -->
+        </tbody>
     </table>
 </ng-container>

@@ -1,3 +1,4 @@
+import { ActivatedRoute } from '@angular/router';
 import { Product } from './../../../shared/models/product';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -16,9 +17,7 @@ export class AdminProductsComponent implements OnInit {
   subscription: Subscription;
   items : ShoppingCartItem[];
 
-  constructor(private productdService: ProductService) {
-
-  }
+  constructor(private productdService: ProductService, private route: ActivatedRoute) {}
 
   filter(query: string) {
     this.filteredProduct = (query) ?
@@ -29,6 +28,7 @@ export class AdminProductsComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log(this.route.snapshot.data.product)
     this.productdService.getData().subscribe(product=>{
       this.filteredProduct = this.productList = product.data as Product[]
     })

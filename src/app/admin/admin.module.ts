@@ -1,3 +1,4 @@
+import { ProductResolveService } from './../shared/services/product-resolve.service';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -28,10 +29,10 @@ import { CategoryResolveService } from '../shared/services/category-resolve.serv
       {
         path:'admin/products/new',
         component:ProductFormComponent, 
-        canActivate:[AuthGuardService,AdminAuthGuardService],
         resolve:{
-          category: CategoryResolveService
-        }
+          product: ProductResolveService
+        },
+        canActivate:[AuthGuardService,AdminAuthGuardService]
       },
       {
         path:'admin/products/:id',
@@ -48,7 +49,7 @@ import { CategoryResolveService } from '../shared/services/category-resolve.serv
   providers:[
     AuthGuardService,
     AdminAuthGuardService,
-    CategoryResolveService
+    CategoryResolveService,
   ]
 })
 export class AdminModule { }

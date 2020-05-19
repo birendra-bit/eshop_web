@@ -1,3 +1,4 @@
+import { ToastService } from './../../../shared/services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CategoryService } from 'src/app/shared/services/business/category.service';
@@ -19,16 +20,18 @@ export class ProductFormComponent implements OnInit {
     private categoryService:CategoryService, 
     private productService:ProductService,
     private router: Router,
-    private route:ActivatedRoute ) {}
+    private route:ActivatedRoute,
+    private toastService:ToastService ) {}
 
    save(product){
+
      if( this.productId) this.productService.updateData( this.productId,product).subscribe(res=>{
-       console.log(res);
+       this.toastService.showToast(res.success, res.message)
       this.router.navigate(['/admin/products']);
      })
       else
       this.productService.createData(product).subscribe(res=>{
-        console.log(res);
+       this.toastService.showToast(res.success, res.message)
         this.router.navigate(['/admin/products']);
       })
    }
@@ -36,7 +39,7 @@ export class ProductFormComponent implements OnInit {
    delete(){
      if(!confirm('Are you sure you want to delete the product')) return;
      this.productService.deleteData(this.productId).subscribe(res=>{
-       console.log(res);
+      this.toastService.showToast(res.success, res.message)
       this.router.navigate(['/admin/products']);
      })
    }

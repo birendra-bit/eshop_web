@@ -1,3 +1,4 @@
+import { ToastService } from './services/toast.service';
 import { DataService } from './services/business/data.service';
 import { AuthService } from './services/auth/auth.service';
 import { ProductQuantityComponent } from './components/product-quantity/product-quantity.component';
@@ -15,13 +16,15 @@ import { ShoppingCartService } from './services/business/shopping-cart.service';
 import { OrderService } from './services/business/order.service';
 import { CategoryResolveService } from './services/category-resolve.service';
 import { ProductResolveService } from './services/product-resolve.service';
+import { AppToastComponent } from './components/app-toast/app-toast.component';
 
 
 
 @NgModule({
   declarations: [
     ProductCardComponent,
-    ProductQuantityComponent
+    ProductQuantityComponent,
+    AppToastComponent
   ],
   imports: [
     CommonModule,
@@ -34,7 +37,8 @@ import { ProductResolveService } from './services/product-resolve.service';
     ProductQuantityComponent,
     CommonModule,
     FormsModule,
-    NgbModule
+    NgbModule,
+    AppToastComponent
   ],
   providers:[
     AuthService,
@@ -46,7 +50,8 @@ import { ProductResolveService } from './services/product-resolve.service';
     ShoppingCartService,
     OrderService,
     CategoryResolveService,
-    ProductResolveService
+    ProductResolveService,
+    ToastService
   ]
 })
 export class SharedModule { }

@@ -1,3 +1,4 @@
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ProductResolveService } from './../shared/services/product-resolve.service';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';

@@ -12,7 +12,7 @@ import { Product } from './../../../shared/models/product';
 })
 export class ProductFormComponent implements OnInit {
   categories: Category[];
-  product: Product;
+  product: Product = new initialState();
   productId;
 
   constructor( 
@@ -42,7 +42,6 @@ export class ProductFormComponent implements OnInit {
    }
 
   ngOnInit() {
-  
     this.categoryService.getData().subscribe(category=>{
       this.categories = category.data as Category[]
     })
@@ -59,11 +58,12 @@ export class ProductFormComponent implements OnInit {
   ngOnDestroy(){
   }
 }
-const initialState={
-  _id:'', 
-  category:'',
-  imageUrl:'',
-  price: 0,
-  title: '',
-  createOn: ''
+class initialState {
+  _id:string='';
+  category:string='';
+  imageUrl:string='';
+  price: number=0;
+  title: string='';
+  createOn: Date = new Date;
+  constructor(){}
 }

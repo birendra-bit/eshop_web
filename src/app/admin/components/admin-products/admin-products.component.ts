@@ -28,7 +28,7 @@ export class AdminProductsComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.route.snapshot.data.product)
+    // console.log(this.route.snapshot.data.product)
     this.productdService.getData().subscribe(product=>{
       this.filteredProduct = this.productList = product.data as Product[]
     })

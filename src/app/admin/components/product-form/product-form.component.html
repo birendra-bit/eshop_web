@@ -50,7 +50,7 @@
           required
         >
           <option value="">Select Category</option>
-          <option *ngFor="let c of categories" [value]="c._id">
+          <option *ngFor="let c of categories" [value]="c.name">
             {{ c.name }}
           </option>
         </select>

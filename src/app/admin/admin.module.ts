@@ -37,7 +37,10 @@ import { CategoryResolveService } from '../shared/services/category-resolve.serv
       {
         path:'admin/products/:id',
         component:ProductFormComponent, 
-        canActivate:[AuthGuardService,AdminAuthGuardService],
+        resolve:{
+          category: CategoryResolveService
+        },
+        canActivate:[AuthGuardService,AdminAuthGuardService]
       },
       {
         path:'admin/products',
@@ -48,8 +51,7 @@ import { CategoryResolveService } from '../shared/services/category-resolve.serv
   ],
   providers:[
     AuthGuardService,
-    AdminAuthGuardService,
-    CategoryResolveService,
+    AdminAuthGuardService
   ]
 })
 export class AdminModule { }

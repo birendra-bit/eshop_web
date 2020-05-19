@@ -50,8 +50,9 @@ export class ProductComponent implements OnInit {
       return index > -1 ? 
        this.cartItems[index].quantity : 0 
   }
+  
   private applyFilter(){
     this.filteredProduct = (this.category) ? 
-    this.products.filter(p => p.category === this.category.toLowerCase()) : this.products;
+    this.products.filter(p => p.category.toLowerCase() === this.category.toLowerCase()) : this.products;
   }
 }

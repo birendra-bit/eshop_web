@@ -1,3 +1,4 @@
+import { ModalService } from './services/modal.service';
 import { ToastService } from './services/toast.service';
 import { DataService } from './services/business/data.service';
 import { AuthService } from './services/auth/auth.service';
@@ -17,6 +18,7 @@ import { OrderService } from './services/business/order.service';
 import { CategoryResolveService } from './services/category-resolve.service';
 import { ProductResolveService } from './services/product-resolve.service';
 import { AppToastComponent } from './components/app-toast/app-toast.component';
+import { ModalComponent } from './components/modal/modal.component';
 
 
 
@@ -24,7 +26,8 @@ import { AppToastComponent } from './components/app-toast/app-toast.component';
   declarations: [
     ProductCardComponent,
     ProductQuantityComponent,
-    AppToastComponent
+    AppToastComponent,
+    ModalComponent
   ],
   imports: [
     CommonModule,
@@ -38,7 +41,8 @@ import { AppToastComponent } from './components/app-toast/app-toast.component';
     CommonModule,
     FormsModule,
     NgbModule,
-    AppToastComponent
+    AppToastComponent,
+    ModalComponent
   ],
   providers:[
     AuthService,

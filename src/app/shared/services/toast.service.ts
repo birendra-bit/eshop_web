@@ -22,7 +22,7 @@ export class ToastService {
         classname: 'bg-success text-light', 
         delay: 5000,
         autohide: true,
-        headertext: 'Success'})
+        headertext: 'Successful'})
     }else{
       this.show(message, {
           classname: 'bg-danger text-light',delay: 5000,

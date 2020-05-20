@@ -27,9 +27,8 @@ export class LoginComponent implements OnInit {
 
         localStorage.setItem('returnUrl',returnUrl);
         localStorage.setItem('token', res.data.token);
-        this.shoppingcartService.getTotalItemsCount();
-
         this.auth.updateUser.emit();
+        this.shoppingcartService.getTotalItemsCount();
         
         this.router.navigate([returnUrl || '/home']);
       

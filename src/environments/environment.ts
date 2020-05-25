@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  url:'http://localhost:5000'
+  url:'https://angular-eshoping-web-demo-2020.herokuapp.com'
 };
 
 /*

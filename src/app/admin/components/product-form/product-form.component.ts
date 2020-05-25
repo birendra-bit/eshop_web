@@ -1,4 +1,3 @@
-import { ModalService } from './../../../shared/services/modal.service';
 import { ToastService } from './../../../shared/services/toast.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -6,8 +5,6 @@ import { CategoryService } from 'src/app/shared/services/business/category.servi
 import { ProductService } from 'src/app/shared/services/business/product.service';
 import { Category } from './../../../shared/models/category';
 import { Product } from './../../../shared/models/product';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ModalComponent } from 'src/app/shared/components/modal/modal.component';
 
 @Component({
   selector: 'app-product-form',

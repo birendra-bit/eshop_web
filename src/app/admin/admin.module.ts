@@ -1,5 +1,4 @@
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ProductResolveService } from './../shared/services/product-resolve.service';
 import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -9,8 +8,6 @@ import { ProductFormComponent } from './components/product-form/product-form.com
 import { RouterModule } from '@angular/router';
 import { AuthGuardService } from '../shared/services/auth/auth-guard.service';
 import { AdminAuthGuardService } from '../shared/services/auth/admin-auth-guard.service';
-import { CategoryResolveService } from '../shared/services/category-resolve.service';
-
 
 
 @NgModule({
@@ -30,17 +27,12 @@ import { CategoryResolveService } from '../shared/services/category-resolve.serv
       {
         path:'admin/products/new',
         component:ProductFormComponent, 
-        resolve:{
-          product: ProductResolveService
-        },
+
         canActivate:[AuthGuardService,AdminAuthGuardService]
       },
       {
         path:'admin/products/:id',
         component:ProductFormComponent, 
-        resolve:{
-          category: CategoryResolveService
-        },
         canActivate:[AuthGuardService,AdminAuthGuardService]
       },
       {

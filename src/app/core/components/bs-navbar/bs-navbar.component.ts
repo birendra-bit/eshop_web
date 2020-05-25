@@ -13,10 +13,10 @@ import { ShoppingCartService } from 'src/app/shared/services/business/shopping-c
 })
 export class BsNavbarComponent implements OnInit {
   appUser: AppUser;
-  totalCartItemsCount: number;
+  // totalCartItemsCount: number;
   subscription: Subscription;
   shoppingCartItems: ShoppingCartItem;
-  shoppingCartItemCount: any
+  shoppingCartItemCount: number
 
   constructor(public auth: AuthService, private shoppingCartService: ShoppingCartService) { }
   logout() {
@@ -35,16 +35,5 @@ export class BsNavbarComponent implements OnInit {
     this.shoppingCartService.currentCartItemsCount.subscribe(count =>{
       this.shoppingCartItemCount = count.totalCartItemsCount
     })
-    // let cart$ = await this.shoppingCartService.getCart();
-
-    // cart$.valueChanges().subscribe(cart => {
-    //   this.shoppingCartItemCount = 0;
-    //   if( !cart )
-    //   return;
-    //   for (let key in cart.items) {
-    //     this.shoppingCartItemCount += cart.items[key].quantity;
-    //   }
-    // })
   }
-
 }

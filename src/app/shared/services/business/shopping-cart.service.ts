@@ -22,7 +22,7 @@ export class ShoppingCartService extends DataService {
 
   getTotalItemsCount() {
     if (localStorage.getItem('token')) {
-
+      // debugger
       this.getData().subscribe(items => {
 
           if(Object.keys(items.data).length === 0) this.currenItemsCount(0);

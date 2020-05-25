@@ -21,7 +21,7 @@ export class RegisterComponent implements OnInit {
   signup(credentials){
 
     this.authService.signUp(credentials).subscribe(res =>{
-      console.log(Object.entries(res))
+      this.router.navigate(['/login'])
     })
   }
 

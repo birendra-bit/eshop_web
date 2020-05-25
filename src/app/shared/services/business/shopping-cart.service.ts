@@ -21,7 +21,6 @@ export class ShoppingCartService extends DataService {
   }
 
   getTotalItemsCount() {
-    console.log('after login',localStorage.getItem('token'))
     if (localStorage.getItem('token')) {
 
       this.getData().subscribe(items => {

@@ -15,6 +15,12 @@
                 <td> {{ item.quantity }}</td>
                 <td>{{ ( item.quantity * getPrice(item.product_id) ) | currency:'Rs '}} </td>
             </tr>
+            <tr>
+                <td></td>
+                <td>Grand Total</td>
+                <td>{{totalItems}}</td>
+                <td>{{getTotal() | currency:'Rs '}}</td>
+            </tr>
         </tbody>
     </table>
 </ng-container>

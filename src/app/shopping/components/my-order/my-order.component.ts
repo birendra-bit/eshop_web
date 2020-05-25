@@ -12,6 +12,8 @@ import { Component, OnInit } from '@angular/core';
 export class MyOrderComponent implements OnInit {
   product:Product[]=[]
   items: Items[]=[];
+  totalPrice:number=0;
+  totalItems:number=0;
   constructor(private shoppingCartService:ShoppingCartService,
     private productService:ProductService) { }
 
@@ -21,6 +23,9 @@ export class MyOrderComponent implements OnInit {
     })
     this.productService.getData().subscribe(p=>{
       this.product = p.data;
+    })
+    this.shoppingCartService.currentCartItemsCount.subscribe(count=>{
+      this.totalItems = count.totalCartItemsCount;
     })
   }
 
@@ -32,5 +37,13 @@ export class MyOrderComponent implements OnInit {
   getPrice(id) : number {
     let index = this.product.findIndex(p=> p._id === id )
     return index > -1 ? this.product[index].price : 1;
+  }
+
+  getTotal(){
+    let total = 0;
+    this.items.forEach(item=>{
+       total += item.quantity * this.getPrice(item.product_id)
+    })
+    return total
   }
 }

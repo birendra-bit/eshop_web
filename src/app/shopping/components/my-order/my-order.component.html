@@ -5,7 +5,7 @@
                 <th>Customer</th>
                 <th>Placed On</th>
                 <th>Quantity</th>
-                <th></th>
+                <th>Price</th>
             </tr>
         </thead>
         <tbody>
@@ -13,7 +13,7 @@
                 <td> {{ getName(item.product_id)}} </td>
                 <td> {{item.placedDate | date}} </td>
                 <td> {{ item.quantity }}</td>
-                <td><a href="#">View</a> </td>
+                <td>{{ ( item.quantity * getPrice(item.product_id) ) | currency:'Rs '}} </td>
             </tr>
         </tbody>
     </table>

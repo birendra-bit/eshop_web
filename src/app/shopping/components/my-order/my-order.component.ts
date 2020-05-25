@@ -28,4 +28,9 @@ export class MyOrderComponent implements OnInit {
     let index = this.product.findIndex(p=> p._id === id )
     return index > -1 ? this.product[index].title : 'null';
   }
+
+  getPrice(id) : number {
+    let index = this.product.findIndex(p=> p._id === id )
+    return index > -1 ? this.product[index].price : 1;
+  }
 }
